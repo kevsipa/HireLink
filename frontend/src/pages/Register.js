@@ -38,25 +38,28 @@ const Register = () => {
       {msg && <p style={{ color: 'red' }}>{msg}</p>}
       <form onSubmit={onSubmit}>
         <div>
-          <label>Username</label>
-          <input name="username" type="text" value={formData.username} onChange={onChange} />
+          <label>Username </label>
+          <input class="border-2 border-indigo-500" name="username" type="text" value={formData.username} onChange={onChange} />
         </div>
         <div>
-          <label>Email</label>
-          <input name="email" type="email" value={formData.email} onChange={onChange} />
+          <label>Email </label>
+          <input class="border-2 border-indigo-500" name="email" type="email" value={formData.email} onChange={onChange} />
         </div>
         <div>
-          <label>Password</label>
-          <input name="password" type="password" value={formData.password} onChange={onChange} />
+          <label>Password </label>
+          <input class="border-2 border-indigo-500" name="password" type="password" value={formData.password} onChange={onChange} />
         </div>
         <div>
-          <label>Role</label>
+          <label>Role </label>
           <select name="role" value={formData.role} onChange={onChange}>
             <option value="seeker">Job Seeker</option>
             <option value="employer">Employer</option>
           </select>
         </div>
-        <button type="submit">Register</button>
+        <button 
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >Register</button>
       </form>
     </div>
   );

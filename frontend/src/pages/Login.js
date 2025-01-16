@@ -28,18 +28,21 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2 className="text-2x1 font-bold mb-4">Login</h2>
       {msg && <p style={{ color: 'red' }}>{msg}</p>}
       <form onSubmit={onSubmit}>
         <div>
-          <label>Email</label>
-          <input name="email" type="email" value={formData.email} onChange={onChange} />
+          <label>Email </label>
+          <input class="border-2 border-indigo-500" name="email" type="email" value={formData.email} onChange={onChange} />
         </div>
         <div>
-          <label>Password</label>
-          <input name="password" type="password" value={formData.password} onChange={onChange} />
+          <label>Password </label>
+          <input class="border-2 border-indigo-500" name="password" type="password" value={formData.password} onChange={onChange} />
         </div>
-        <button type="submit">Login</button>
+        <button 
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >Login</button>
       </form>
     </div>
   );
