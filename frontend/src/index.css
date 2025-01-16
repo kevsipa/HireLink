@@ -1,6 +1,10 @@
 /* jobify-frontend/src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
+  @apply bg-gray-100;
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #fafafa;
