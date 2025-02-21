@@ -12,7 +12,10 @@ const externalJobRoutes = require('./routes/externalJobRoutes');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['hire-link-1xw4.vercel.app'], // add your Vercel URL here
+  optionsSuccessStatus: 200,
+}));
 app.use(bodyParser.json());
 
 // Routes
