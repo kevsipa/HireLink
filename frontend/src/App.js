@@ -8,6 +8,7 @@ import Jobs from './pages/Jobs';
 import JobDetails from './pages/JobDetails';
 import CreateJob from './pages/CreateJob';
 import Profile from './pages/Profile';
+import ExternalJobs from './pages/ExternalJobs';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -39,7 +40,9 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
+            {/* New route for external jobs */}
+            <Route path="/external-jobs" element={<ExternalJobs />} />
+            
             {/* 404 Fallback */}
             <Route path="*" element={<h2>Page Not Found</h2>} />
           </Routes>
