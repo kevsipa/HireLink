@@ -19,6 +19,12 @@ const JobSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Location is required'],
     },
+    // Optional: store the remote job id to avoid duplicates
+    remoteId: {
+      type: Number,
+      unique: true,
+      sparse: true, // allows multiple null values
+    },
     postedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',

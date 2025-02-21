@@ -1,9 +1,9 @@
 // Hirelink-backend/routes/externalJobRoutes.js
 const express = require('express');
 const router = express.Router();
-const { getExternalJobs } = require('../controllers/externalJobController');
+const { createJobsFromRemote } = require('../controllers/externalJobController');
 
-// Route: GET /api/external-jobs
-router.get('/', getExternalJobs);
+// Create jobs from the remote API
+router.post('/create', createJobsFromRemote);
 
 module.exports = router;
