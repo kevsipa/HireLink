@@ -14,9 +14,16 @@ const ExternalJobs = () => {
         console.error('Error fetching external jobs:', err);
       }
     };
-    // Automatically fetch jobs on component mount
+
+    // Initial fetch on mount
     fetchExternalJobs();
-  }, []); // empty dependency array means this runs once on mount
+
+    // Poll every 60 seconds for new data
+    const intervalId = setInterval(fetchExternalJobs, 60000);
+
+    // Cleanup the interval on unmount
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="max-w-5xl mx-auto p-6">
