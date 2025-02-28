@@ -17,6 +17,8 @@ async function syncExternalJobs(){
       // if (processedIds.has(remoteJob.id)) continue;
       // processedIds.add(remoteJob.id);
       // Check if the job already exists using the remoteId field
+      // If we've already created 100 new jobs, stop processing further.
+      if (createdJobs.length >= 100) break;
       const existingJob = await Job.findOne({ remoteId: remoteJob.id });
       if (!existingJob) {
         // Map remote job fields to your local Job model fields
