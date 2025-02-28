@@ -2,20 +2,20 @@
 const axios = require('axios');
 const Job = require('../models/Job');
 
-exports.createJobsFromRemote = async (req, res) => {
+async function syncExternalJobs(){
   try {
     // Fetch jobs from the Remotive API
     const response = await axios.get('https://remotive.com/api/remote-jobs');
     const remoteJobs = response.data.jobs; // API returns an object with a "jobs" array
     
     const createdJobs = [];
-    const processedIds = new Set();
+    // const processedIds = new Set();
     
     // Loop through each job from Remotive
     for (const remoteJob of remoteJobs) {
-      // Skip if we've already processed this remoteId in this run
-      if (processedIds.has(remoteJob.id)) continue;
-      processedIds.add(remoteJob.id);
+      // // Skip if we've already processed this remoteId in this run
+      // if (processedIds.has(remoteJob.id)) continue;
+      // processedIds.add(remoteJob.id);
       // Check if the job already exists using the remoteId field
       const existingJob = await Job.findOne({ remoteId: remoteJob.id });
       if (!existingJob) {
@@ -34,6 +34,17 @@ exports.createJobsFromRemote = async (req, res) => {
       }
     }
 
+    return createdJobs;
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.syncExternalJobs = syncExternalJobs;
+
+exports.createJobsFromRemote = async (req, res) => {
+  try {
+    const createdJobs = await syncExternalJobs();
     return res.status(201).json({
       msg: 'Jobs created from remote API',
       count: createdJobs.length,

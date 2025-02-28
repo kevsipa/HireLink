@@ -23,24 +23,29 @@ app.use('/api/auth', authRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/external-jobs', externalJobRoutes);
 
-// MongoDB connection
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(async() => {
-    console.log('Connected to MongoDB Atas!');
-    // Run the connectionStatus command to see authenticated user info
-    const status = await mongoose.connection.db.command({ connectionStatus: 1 });
-    console.log('Authenticated Users:', status.authInfo.authenticatedUsers);
+  .then(() => {
+    console.log('Connected to MongoDB Atlas!');
+    
+    // Automatically sync external jobs on startup
+    syncExternalJobs()
+      .then((jobs) => {
+        console.log(`Startup sync: Created ${jobs.length} new job(s).`);
+      })
+      .catch((error) => {
+        console.error('Error during startup sync:', error.message);
+      });
+      
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
   })
-  .catch(err => console.log(err));
-  const { MongoClient } = require('mongodb');
+  .catch((err) => console.log(err));
 
 // Use the same MONGO_URI from your .env
-const uri = process.env.MONGO_URI;
+// const uri = process.env.MONGO_URI;
 
 // async function updateUserRoles() {
 //   const client = new MongoClient(uri);
