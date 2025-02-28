@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const externalJobRoutes = require('./routes/externalJobRoutes');
+const { syncExternalJobs } = require('./controllers/externalJobController');
 
 const app = express();
 
