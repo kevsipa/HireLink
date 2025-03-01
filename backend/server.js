@@ -14,7 +14,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['hire-link-1xw4.vercel.app'], // add your Vercel URL here
+  origin: ['https://hire-link-1xw4.vercel.app'], // add your Vercel URL here
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
   optionsSuccessStatus: 200,
